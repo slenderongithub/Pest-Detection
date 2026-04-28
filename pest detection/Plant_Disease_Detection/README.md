@@ -1,78 +1,103 @@
-# 🔬 LeafScan — AI Plant Disease Detector
+# LeafScan - AI Plant Disease Detector
 
-> Upload a leaf photo. Get an instant diagnosis, severity rating, and treatment recommendation — powered by deep learning.
+LeafScan is a Streamlit app for classifying plant leaf images into one of 38 PlantVillage disease classes and showing a severity level, cause, and treatment tip.
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAI](https://img.shields.io/badge/FastAI-1.0.61-00b0ff?style=flat)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?style=flat&logo=streamlit&logoColor=white)
 ![Model](https://img.shields.io/badge/Model-ResNet34-6366f1?style=flat)
 
----
+## Features
 
-## What It Does
-
-LeafScan analyses plant leaf images and returns:
-
-- **Disease name** — identified from 38 classes across 11 plant species
-- **Confidence score** — how certain the model is
-- **Severity level** — Critical / High / Medium / Low / Healthy
-- **Cause** — fungal, bacterial, viral, or pest
-- **Treatment tip** — actionable next steps
-- **Top 3 predictions** — alternative diagnoses with probabilities
-- **Scan history** — last 5 scans tracked in session
+- Upload a plant leaf image and get an instant prediction
+- View confidence score and top 3 predictions
+- See severity, likely cause, and treatment guidance
+- Works with 38 PlantVillage classes across 11 plant species
+- Automatically downloads the exported model file on first run if needed
 
 ## Supported Plants
 
-🍎 Apple · 🫐 Blueberry · 🍒 Cherry · 🌽 Corn · 🍇 Grape · 🍊 Orange · 🍑 Peach · 🫑 Pepper · 🥔 Potato · 🍓 Strawberry · 🍅 Tomato
+Apple, Blueberry, Cherry, Corn, Grape, Orange, Peach, Pepper, Potato, Strawberry, and Tomato.
 
 ## Quick Start
 
 ```bash
-# 1. Clone the repo
 git clone https://github.com/slenderongithub/Pest-Detection.git
 cd Pest-Detection/Plant_Disease_Detection
 
-# 2. Install dependencies
-pip install streamlit fastai==1.0.61 ipython torch torchvision pillow
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3. Run
+pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The model file (`app/models/export_resnet34_model.pkl`) will be downloaded automatically on first run if not present.
+If you already have the dependencies installed, you can skip the virtual environment steps and just run:
 
-## Tech Stack
+```bash
+cd "/Users/slender/Developer/Codes/pest detection/Plant_Disease_Detection"
+streamlit run app.py
+```
 
-| Component | Details |
-|-----------|---------|
-| Model | ResNet34 fine-tuned via FastAI |
-| Dataset | [PlantVillage](https://plantvillage.psu.edu/) — 38 disease classes |
-| Backend | FastAI v1 + PyTorch |
-| Frontend | Streamlit |
-| Deployment | Local / GCP App Engine / AWS Elastic Beanstalk |
+## How It Works
+
+1. Upload a leaf image.
+2. The app preprocesses the image.
+3. A fine-tuned ResNet34 model predicts the disease class.
+4. The app maps the prediction to severity, cause, and treatment guidance.
+5. The top 3 predictions are displayed for comparison.
+
+## Model Details
+
+- Architecture: ResNet34
+- Framework: FastAI v1 + PyTorch
+- Model file: `app/models/export_resnet34_model.pkl`
+- Dataset: PlantVillage
+- Classes: 38
+
+The app will try to download the model automatically if the `.pkl` file is missing.
 
 ## Project Structure
 
-```
+```text
 Plant_Disease_Detection/
-├── app.py                  # Streamlit application
+├── app.py                  # Streamlit application entry point
 ├── app/
-│   ├── models/             # ResNet34 model weights (.pkl)
-│   ├── static/             # CSS, JS, images
-│   └── view/               # HTML templates (legacy Flask UI)
-├── notebook/               # Experimentation notebooks (PyTorch, Keras, TF, FastAI)
-├── deployment_guide/       # AWS & GCP step-by-step guides
+│   ├── models/             # Exported FastAI model files
+│   ├── static/             # Images and static assets
+│   └── view/               # Legacy frontend files
+├── notebook/               # Training and experiment notebooks
+├── deployment_guide/       # Deployment instructions
 ├── requirements.txt
 └── Dockerfile
 ```
 
+## Requirements
+
+The project uses the dependencies in `requirements.txt`, including:
+
+- fastai==1.0.61
+- torch
+- torchvision
+- streamlit
+- numpy
+- pillow
+
+## Troubleshooting
+
+- If the app shows a model warning, make sure `app/models/export_resnet34_model.pkl` exists.
+- If FastAI fails to import, reinstall the dependencies from `requirements.txt`.
+- If you are on macOS Apple Silicon, use a compatible Python environment and reinstall the dependencies in that environment.
+
 ## Deployment
 
-See [`deployment_guide/`](deployment_guide/) for step-by-step instructions for:
-- **GCP App Engine** — [`gcp_deployment.md`](deployment_guide/gcp_deployment.md)
-- **AWS Elastic Beanstalk** — [`aws_deployment.md`](deployment_guide/aws_deployment.md)
-- **Local Flask** — [`deployment_guide/local_flask/`](deployment_guide/local_flask/)
+See the guides in [`deployment_guide/`](deployment_guide/) for deployment options and setup notes.
 
----
+## Notes
 
-*Built at VIT-AP University as part of a research project on automated plant disease detection.*
+- This repository contains both the current Streamlit app and older FastAI/Flask-era assets.
+- The Streamlit app is the main entry point in `app.py`.
+
+## License
+
+See [LICENSE](LICENSE) for details.
