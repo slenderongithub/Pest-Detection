@@ -1,0 +1,227 @@
+{
+  "model_name": "pest_resnet50",
+  "arch": "resnet50",
+  "onnx": "model.int8.onnx",
+  "class_names": [
+    "Adristyrannus",
+    "Aleurocanthus spiniferus",
+    "Ampelophaga",
+    "Aphis citricola Vander Goot",
+    "Apolygus lucorum",
+    "alfalfa plant bug",
+    "alfalfa seed chalcid",
+    "alfalfa weevil",
+    "aphids"
+  ],
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "input_size": 224,
+  "resize_ratio": 1.1428571428571428,
+  "temperature": 0.874112606048584,
+  "abstain_threshold": 0.4,
+  "fc_shape": [
+    9,
+    2048
+  ],
+  "macro_f1": 0.7731,
+  "pests": {
+    "Adristyrannus": {
+      "common_name": "Adristyrannus",
+      "pest_type": "Bug (Hemiptera)",
+      "severity": "Medium",
+      "description": "A phytophagous bug that feeds on foliage and tender shoots, causing stippling and distortion. Localised outbreaks can defoliate young plants.",
+      "pesticides": [
+        {
+          "name": "Acephate",
+          "dose": "1 g/L"
+        },
+        {
+          "name": "Malathion",
+          "dose": "2 ml/L"
+        },
+        {
+          "name": "Permethrin",
+          "dose": "1 ml/L"
+        }
+      ],
+      "ipm": "Remove weed hosts, encourage generalist predators, and scout tender shoots early."
+    },
+    "Aleurocanthus spiniferus": {
+      "common_name": "Orange spiny whitefly",
+      "pest_type": "Whitefly (Hemiptera)",
+      "severity": "High",
+      "description": "A whitefly of citrus and other trees. Nymphs excrete honeydew that fuels sooty mould, reducing photosynthesis; it is a regulated quarantine pest in many regions.",
+      "pesticides": [
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Acetamiprid",
+          "dose": "0.5 g/L"
+        },
+        {
+          "name": "Chlorpyrifos",
+          "dose": "2 ml/L"
+        }
+      ],
+      "ipm": "Use yellow sticky traps, conserve Encarsia/Eretmocerus parasitoids, prune dense canopy."
+    },
+    "Ampelophaga": {
+      "common_name": "Grapevine hawk moth (Ampelophaga)",
+      "pest_type": "Moth larva (Lepidoptera)",
+      "severity": "Medium",
+      "description": "Large caterpillars that defoliate grapevine and related hosts. A few larvae can strip significant leaf area quickly during outbreaks.",
+      "pesticides": [
+        {
+          "name": "Chlorpyrifos",
+          "dose": "2 ml/L"
+        },
+        {
+          "name": "Methoxyfenozide",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Spinosad",
+          "dose": "0.5 ml/L"
+        }
+      ],
+      "ipm": "Hand-pick larvae on small plots; apply Bacillus thuringiensis while larvae are young."
+    },
+    "Aphis citricola Vander Goot": {
+      "common_name": "Spirea/citrus aphid (Aphis citricola)",
+      "pest_type": "Aphid (Hemiptera)",
+      "severity": "High",
+      "description": "A colonising aphid on citrus and pome fruit. Feeds on new growth, curls leaves, and transmits plant viruses; honeydew promotes sooty mould.",
+      "pesticides": [
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Thiacloprid",
+          "dose": "0.5 ml/L"
+        },
+        {
+          "name": "Thiamethoxam",
+          "dose": "0.25 g/L"
+        }
+      ],
+      "ipm": "Protect ladybird beetles and lacewings; avoid excess nitrogen that flushes soft growth."
+    },
+    "Apolygus lucorum": {
+      "common_name": "Green plant bug (Apolygus lucorum)",
+      "pest_type": "Mirid bug (Hemiptera)",
+      "severity": "High",
+      "description": "A highly mobile mirid that punctures buds, flowers, and fruit of cotton, fruit, and vegetables, causing shedding and deformed produce; a major pest across its range.",
+      "pesticides": [
+        {
+          "name": "Lambda-cyhalothrin",
+          "dose": "0.5 ml/L"
+        },
+        {
+          "name": "Chlorpyrifos",
+          "dose": "2 ml/L"
+        },
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        }
+      ],
+      "ipm": "Monitor with sweep nets at flowering; manage border weed hosts that harbour adults."
+    },
+    "alfalfa plant bug": {
+      "common_name": "Alfalfa plant bug",
+      "pest_type": "Mirid bug (Hemiptera)",
+      "severity": "Medium",
+      "description": "Feeds on alfalfa buds and growing tips, reducing seed set and forage quality during bloom.",
+      "pesticides": [
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Lambda-cyhalothrin",
+          "dose": "0.5 ml/L"
+        },
+        {
+          "name": "Chlorpyrifos",
+          "dose": "2 ml/L"
+        }
+      ],
+      "ipm": "Time cutting to disrupt nymphs; sweep-net scout before bloom and treat on threshold."
+    },
+    "alfalfa seed chalcid": {
+      "common_name": "Alfalfa seed chalcid",
+      "pest_type": "Seed wasp (Hymenoptera)",
+      "severity": "Medium",
+      "description": "Larvae develop inside developing alfalfa seeds, hollowing them out and directly cutting seed yield. Damage is hidden until seeds are inspected.",
+      "pesticides": [
+        {
+          "name": "Azadirachtin",
+          "dose": "2 ml/L"
+        },
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Spinosad",
+          "dose": "0.5 ml/L"
+        }
+      ],
+      "ipm": "Destroy volunteer/wild alfalfa, harvest promptly, and sanitise infested seed screenings."
+    },
+    "alfalfa weevil": {
+      "common_name": "Alfalfa weevil",
+      "pest_type": "Weevil (Coleoptera)",
+      "severity": "High",
+      "description": "Larvae skeletonise alfalfa leaves in the first cutting, causing the classic \"frosted\" field appearance and major forage loss in spring.",
+      "pesticides": [
+        {
+          "name": "Chlorpyrifos",
+          "dose": "2 ml/L"
+        },
+        {
+          "name": "Cyfluthrin",
+          "dose": "0.5 ml/L"
+        },
+        {
+          "name": "Carbaryl",
+          "dose": "2 g/L"
+        }
+      ],
+      "ipm": "Early cutting often controls larvae; conserve the parasitoid Bathyplectes."
+    },
+    "aphids": {
+      "common_name": "Aphids (general)",
+      "pest_type": "Aphid (Hemiptera)",
+      "severity": "High",
+      "description": "Soft-bodied colonising insects that suck sap, curl leaves, excrete honeydew, and transmit many plant viruses. Reproduce explosively under warm conditions.",
+      "pesticides": [
+        {
+          "name": "Imidacloprid",
+          "dose": "0.3 ml/L"
+        },
+        {
+          "name": "Acetamiprid",
+          "dose": "0.5 g/L"
+        },
+        {
+          "name": "Thiamethoxam",
+          "dose": "0.25 g/L"
+        }
+      ],
+      "ipm": "Favour ladybirds/lacewings/parasitic wasps; a strong water spray dislodges light colonies."
+    }
+  },
+  "disclaimer": "Severity is an indicative agronomic-threat rating, not a measure of model certainty. Pesticide names and dosages are reference information transcribed from the project's agricultural guideline spreadsheet and must not be treated as a prescription. Follow product labels, local regulations, and professional agronomic advice."
+}

@@ -1,0 +1,19 @@
+# LeafScan — fully static, in-browser inference. No backend, no build step.
+# The publish dir is `web/`; the model runs in WASM (onnxruntime-web) in the browser.
+
+[build]
+  publish = "web"
+  command = ""   # nothing to build — everything in web/ is served as-is
+
+# Long-cache the model artifacts (they're content-stable; re-export changes the bytes).
+[[headers]]
+  for = "/model/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# onnxruntime-web loads its WASM from the jsdelivr CDN and runs single-threaded, so NO
+# COOP/COEP cross-origin-isolation headers are required. If you switch to multi-threaded
+# WASM for speed, add:
+#   Cross-Origin-Opener-Policy = "same-origin"
+#   Cross-Origin-Embedder-Policy = "require-corp"
+# and self-host the ORT wasm files (a CDN script can't be COEP-embedded otherwise).

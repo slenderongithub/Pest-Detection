@@ -1,0 +1,12 @@
+# Canonical dependencies live in pyproject.toml. This file installs the project
+# (editable) with the serve + train + dev extras for a full local setup:
+#
+#   pip install -r requirements.txt
+#
+# For a serve-only install (e.g. Docker), use: pip install '.[serve]'
+# On CPU-only hosts, install torch from the CPU wheel index first:
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#
+# The old pins (torch==1.4.0, numpy==1.16.3, fastai==1.0.60, starlette==0.12.0) were
+# mutually incompatible and uninstallable against streamlit>=1.32; they are removed.
+-e .[serve,train,dev]

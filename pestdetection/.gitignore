@@ -1,0 +1,56 @@
+# --- Dataset images (large; not committed) ---
+data/Pest_Dataset/
+Pest_Dataset/
+
+# --- Model weights (large; hosted as release assets, fetched via scripts/fetch_model.py) ---
+# NOTE: manifest.json and registry.json ARE committed so metrics/provenance stay verifiable.
+*.h5
+*.pkl
+*.zip
+*.pt
+*.pth
+models/_smoke/
+reports/_smoke/
+
+# --- Committed-on-purpose exceptions (verifiability) ---
+!data/splits/
+!data/knowledge/
+!models/registry.json
+
+# --- Virtual environments ---
+venv/
+env/
+.env
+.venv/
+.venv39/
+
+# --- Python cache / build ---
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+
+# --- Tooling caches ---
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+logs/
+
+# --- macOS ---
+.DS_Store
+
+# --- Legacy generated figures ---
+docs/paper_figures/
+
+# --- In-browser ONNX model artifacts: COMMITTED on purpose. Netlify's git-based deploy
+#     has no build step (see netlify.toml), so these must ship in the repo, not be
+#     regenerated at deploy time. Regenerate locally with:
+#       python scripts/export_onnx.py --quantize
+#     Only ignore the intermediate fp32 export (never actually served).
+web/model/model.onnx
+
+# --- Local tooling settings ---
+.claude/settings.local.json
+.vscode/

@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install CPU torch + project
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+          pip install -e '.[serve,train,dev]'
+
+      - name: Lint
+        run: ruff check leafscan app.py app/server.py scripts tests
+
+      - name: Unit + integration tests
+        run: pytest -q
+
+      - name: Import smoke (both entry points load)
+        run: |
+          python -c "import leafscan; print('leafscan', leafscan.__version__)"
+          python -c "import importlib.util as u; s=u.spec_from_file_location('srv','app/server.py'); m=u.module_from_spec(s); s.loader.exec_module(m); print('server routes', len(m.app.routes))"
+
+      - name: Training pipeline smoke (tiny, frozen backbone)
+        run: |
+          # Uses a tiny synthetic dataset so CI needs no real images.
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          root = Path("data/Pest_Dataset")
+          classes = ["aphids","alfalfa weevil","Ampelophaga"]
+          for c in classes:
+              (root/c).mkdir(parents=True, exist_ok=True)
+              for i in range(15):
+                  Image.new("RGB",(64,64),(i*8 % 255, 80, 40)).save(root/c/f"{i}.jpg")
+          PY
+          leafscan train --smoke --device cpu --pretrained
+
+      - name: Health boot check (demo mode, no model)
+        run: |
+          python - <<'PY'
+          import importlib.util as u
+          spec = u.spec_from_file_location("srv","app/server.py")
+          m = u.module_from_spec(spec); spec.loader.exec_module(m)
+          from starlette.testclient import TestClient
+          with TestClient(m.app) as c:
+              r = c.get("/health"); assert r.status_code == 200, r.text
+              print("health:", r.json())
+          PY

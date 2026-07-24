@@ -1,0 +1,221 @@
+{
+  "arch": "resnet18",
+  "class_names": [
+    "Adristyrannus",
+    "Aleurocanthus spiniferus",
+    "Ampelophaga",
+    "Aphis citricola Vander Goot",
+    "Apolygus lucorum",
+    "alfalfa plant bug",
+    "alfalfa seed chalcid",
+    "alfalfa weevil",
+    "aphids"
+  ],
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "input_size": 224,
+  "gradcam_layer": "layer4",
+  "temperature": 0.8293558359146118,
+  "abstain_threshold": 0.4,
+  "data_sha256": "a42cf713e5685a15deeaf73ef788bc87cb58f987e238c8461cf855aa827f7394",
+  "git_sha": "28aa666",
+  "metrics": {
+    "accuracy": 0.8045,
+    "macro_f1": 0.7613,
+    "weighted_f1": 0.8129,
+    "top3_accuracy": 0.9497,
+    "temperature": 0.8294,
+    "ece_before": 0.0928,
+    "ece_after": 0.0509,
+    "num_samples": 716,
+    "per_class": {
+      "Adristyrannus": {
+        "precision": 0.8387,
+        "recall": 0.9286,
+        "f1": 0.8814,
+        "support": 28
+      },
+      "Aleurocanthus spiniferus": {
+        "precision": 0.8592,
+        "recall": 0.9839,
+        "f1": 0.9173,
+        "support": 62
+      },
+      "Ampelophaga": {
+        "precision": 0.8657,
+        "recall": 0.8406,
+        "f1": 0.8529,
+        "support": 69
+      },
+      "Aphis citricola Vander Goot": {
+        "precision": 0.4091,
+        "recall": 0.8438,
+        "f1": 0.551,
+        "support": 32
+      },
+      "Apolygus lucorum": {
+        "precision": 0.5319,
+        "recall": 0.7353,
+        "f1": 0.6173,
+        "support": 34
+      },
+      "alfalfa plant bug": {
+        "precision": 0.7031,
+        "recall": 0.7627,
+        "f1": 0.7317,
+        "support": 59
+      },
+      "alfalfa seed chalcid": {
+        "precision": 0.75,
+        "recall": 0.7059,
+        "f1": 0.7273,
+        "support": 17
+      },
+      "alfalfa weevil": {
+        "precision": 0.7949,
+        "recall": 0.6596,
+        "f1": 0.7209,
+        "support": 47
+      },
+      "aphids": {
+        "precision": 0.9238,
+        "recall": 0.7908,
+        "f1": 0.8521,
+        "support": 368
+      }
+    },
+    "confusion_matrix": [
+      [
+        26,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        61,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        2,
+        0,
+        58,
+        4,
+        0,
+        2,
+        1,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        27,
+        0,
+        0,
+        1,
+        0,
+        4
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        25,
+        4,
+        0,
+        0,
+        4
+      ],
+      [
+        1,
+        1,
+        2,
+        0,
+        4,
+        45,
+        1,
+        0,
+        5
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        12,
+        1,
+        3
+      ],
+      [
+        2,
+        0,
+        1,
+        2,
+        0,
+        5,
+        0,
+        31,
+        6
+      ],
+      [
+        0,
+        7,
+        4,
+        33,
+        18,
+        8,
+        1,
+        6,
+        291
+      ]
+    ],
+    "class_names": [
+      "Adristyrannus",
+      "Aleurocanthus spiniferus",
+      "Ampelophaga",
+      "Aphis citricola Vander Goot",
+      "Apolygus lucorum",
+      "alfalfa plant bug",
+      "alfalfa seed chalcid",
+      "alfalfa weevil",
+      "aphids"
+    ],
+    "name": "pest_resnet18",
+    "best_val_macro_f1": 0.6786,
+    "device": "mps",
+    "epochs": 14,
+    "seed": 1337
+  },
+  "created_at": "2026-07-11T21:12:09.322118+00:00",
+  "lib_versions": {
+    "python": "3.12.7",
+    "torch": "2.2.0",
+    "torchvision": "0.17.0",
+    "numpy": "1.26.4"
+  },
+  "weights_sha256": "2af5335cba4e2df40d43e3c6333d528b7b43ca47b71083723354e9a757af733f"
+}

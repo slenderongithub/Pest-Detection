@@ -1,0 +1,44 @@
+# Reproducible training configuration for the flagship 9-class pest classifier.
+# Consumed by `leafscan train --config configs/pest_resnet18.yaml`.
+# Every value here (plus the committed split + git sha + data hash) is what makes a
+# training run reproducible and its metrics verifiable.
+
+name: pest_resnet18
+
+# --- Data ---
+data_dir: data/Pest_Dataset
+split_csv: data/splits/pest_v1.csv
+seed: 1337
+split_ratios: [0.70, 0.15, 0.15] # train / val / test (stratified per class)
+min_eval_per_class: 5             # floor so the smallest class stays evaluable
+
+# --- Model ---
+arch: resnet18            # torchvision backbone; resnet34/resnet50 also supported
+pretrained: true          # ImageNet-pretrained backbone (weights cached locally)
+freeze_backbone: false    # full fine-tune (set true for a fast CI/smoke run)
+input_size: 224
+normalize:
+  mean: [0.485, 0.456, 0.406]  # ImageNet stats (backbone was pretrained with these)
+  std:  [0.229, 0.224, 0.225]
+
+# --- Optimisation ---
+epochs: 14
+batch_size: 32
+lr: 0.0005                # AdamW base LR (full fine-tune)
+weight_decay: 0.0001
+label_smoothing: 0.05
+class_weighted_loss: true # inverse-frequency CE for the 22x imbalance (single correction)
+num_workers: 4
+scheduler: cosine         # cosine annealing over epochs
+
+# --- Augmentation (light — small per-class counts; no MixUp/CutMix by design) ---
+augment:
+  randaugment_ops: 2
+  randaugment_magnitude: 7
+  horizontal_flip: true
+
+# --- Output ---
+output_dir: models/pest_resnet18
+reports_dir: reports
+calibrate: true           # fit temperature scaling on the val split after training
+abstain_threshold: 0.40   # recorded in the manifest; served as the "uncertain" gate
